@@ -1,3 +1,5 @@
+package DTOs;
+
 public class CarClass {
     private int id;
     private String model;

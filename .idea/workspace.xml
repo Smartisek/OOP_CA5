@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36c7a4d1-4412-400c-bd34-1bf7b9d988ce" name="Changes" comment="" />
+    <list default="true" id="36c7a4d1-4412-400c-bd34-1bf7b9d988ce" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/BusinessObjects/CarClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CarClass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DaoException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Exception/DaoException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MySqlDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAOs/MySqlDao.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,6 +68,9 @@
       <updated>1710000309574</updated>
       <workItem from="1710000310629" duration="1000" />
       <workItem from="1710001913564" duration="1844000" />
+      <workItem from="1710089633533" duration="196000" />
+      <workItem from="1710093169855" duration="634000" />
+      <workItem from="1710155659361" duration="849000" />
     </task>
     <servers />
   </component>

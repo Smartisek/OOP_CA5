@@ -1,6 +1,13 @@
+package BusinessObjects;
+
+import DAOs.MySqlDao;
+import Exception.DaoException;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DaoException {
+
+        MySqlDao dd = new MySqlDao();
+        dd.getConnection();
 
     }
 }
