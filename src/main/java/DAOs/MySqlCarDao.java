@@ -58,30 +58,39 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
 
 //    **** Dominik's code ****
     public CarClass findCarById(int id) throws DaoException{
+//        Declaring needed variables, setting them to null for now
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         CarClass car = null;
+        //            Everything in the try block will try to execute code inside, if not
         try {
-//            Everything in the try block will try to execute code inside, if not
+// setting connection variable to the function that connects to our database
             connection = this.getConnection();
+//            Storing our sql query into a string variable, ? gets defined below
             String query = "SELECT * FROM car WHERE id = ?";
+//  Prepares the statement to be sent into the database
             preparedStatement = connection.prepareStatement(query);
+//            in our query setting the ? to be a int of a value of id that's passed into the function
             preparedStatement.setInt(1, id);
-
+// finally our sql statement gets executed by calling executeQuery();
             resultSet = preparedStatement.executeQuery();
+//            if there is data in the resultSet do this
             if(resultSet.next()){
+//  retrieves the data from database and stores them into our variables
                 int carId = resultSet.getInt("ID");
                 String model = resultSet.getString("MODEL");
                 String brand = resultSet.getString("BRAND");
                 String colour = resultSet.getString("COLOUR");
                 int production_year = resultSet.getInt("PRODUCTION_YEAR");
                 int price = resultSet.getInt("PRICE");
-
+// then create a new object of a type CarClass and put our values into it, if it is found
                 car = new CarClass(carId, model, brand, colour, production_year, price);
             }
+//            catch if our try block does not run
         } catch (SQLException e){
             throw new DaoException("findCarById()" + e.getMessage());
+//      after all this we need to make sure to close the connection
         } finally {
             try {
                 if (resultSet != null){
@@ -90,13 +99,16 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
                 if(preparedStatement != null){
                     preparedStatement.close();
                 }
+//                call our function from mysqldao that will close the system
                 if(connection != null){
                     freeConnection(connection);
                 }
+//                if anything goes wrong throw exception
             } catch (SQLException e){
                 throw new DaoException("findCarById()" + e.getMessage());
             }
         }
+//        at the end return our car object if it was found
         return car;
     }
 
