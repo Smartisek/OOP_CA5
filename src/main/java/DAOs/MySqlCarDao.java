@@ -52,4 +52,17 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
         }
         return carList;
     }
+
+    //    Feature 2 – Find and Display (a single) Entity by Key
+//    e.g. getPlayerById(id ) – return a single entity (DTO) and display its contents.
+
+    public CarClass findCarById(int id) throws DaoException{
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        CarClass car = null;
+        
+    }
+
+
 }
