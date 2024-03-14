@@ -9,7 +9,7 @@ import Exception.DaoException;
 import java.util.List;
 
 public class App {
-    public static void main(String[] args){
+    public static void main(String[] args) throws DaoException {
         CarDaoInterface IUserDao = new MySqlCarDao();
         try {
             System.out.println("\nCall: findAllCars()");
@@ -34,6 +34,14 @@ public class App {
         } catch (DaoException e){
             e.printStackTrace();
         }
+
+        int code = IUserDao.insertCar(new CarClass(1, "Civic", "Honda", "Silver", 2010, 25000));
+        if(code == 1) {
+            System.out.println("\nCar added successfully");
+        } else if (code == 0) {
+            System.out.println("\nCar already exists in table");
+        }
     }
+
 
 }
