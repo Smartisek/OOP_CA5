@@ -35,12 +35,14 @@ public class App {
             e.printStackTrace();
         }
 
-        int code = IUserDao.insertCar(new CarClass(1, "Civic", "Honda", "Silver", 2010, 25000));
-        if(code == 1) {
-            System.out.println("\nCar added successfully");
-        } else if (code == 0) {
-            System.out.println("\nCar already exists in table");
+
+        CarClass newCar = IUserDao.insertCar("Huracan", "Lamborghini", "Silver", 2023, 250000);
+        if(newCar != null){
+            System.out.println("New entity added: " + newCar);
+        } else {
+            System.out.println("Entity was not added.");
         }
+
     }
 
 

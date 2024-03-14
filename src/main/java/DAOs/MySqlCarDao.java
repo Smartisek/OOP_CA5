@@ -1,10 +1,8 @@
 package DAOs;
 import DTOs.CarClass;
 import Exception.DaoException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +55,7 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
 //    e.g. getPlayerById(id ) – return a single entity (DTO) and display its contents.
 
 //    **** Dominik's code ****
+    @Override
     public CarClass findCarById(int id) throws DaoException{
 //        Declaring needed variables, setting them to null for now
         Connection connection = null;
@@ -112,37 +111,43 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
         return car;
     }
 // **** Logan's code feature for inserting a new entity
-    public int insertCar(CarClass car) throws DaoException {
+    @Override
+    public CarClass insertCar(String model, String brand, String colour, int year, int price) throws DaoException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         PreparedStatement checkStatement = null;
         ResultSet resultSet = null;
-        int code;
+        CarClass newCar = null;
+        int code = 0;
 
         try {
             connection = this.getConnection();
 
             // Prepare insert statement
             String query = "INSERT INTO car VALUES (null, ?, ?, ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, car.getModel());
-            preparedStatement.setString(2, car.getBrand());
-            preparedStatement.setString(3, car.getColour());
-            preparedStatement.setInt(4, car.getProduction_year());
-            preparedStatement.setInt(5, car.getPrice());
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, model);
+            preparedStatement.setString(2, brand);
+            preparedStatement.setString(3, colour);
+            preparedStatement.setInt(4, year);
+            preparedStatement.setInt(5, price);
 
             // Prepare statement to check if the car is in the table already
             String checkQuery = "SELECT * FROM car WHERE model = ? AND brand = ?";
             checkStatement = connection.prepareStatement(checkQuery);
-            checkStatement.setString(1, car.getModel());
-            checkStatement.setString(2, car.getBrand());
+            checkStatement.setString(1, model);
+            checkStatement.setString(2, brand);
             resultSet = checkStatement.executeQuery();
 
             // If the car is found in the table
-            if(resultSet.next())
-                code = 0;
-            else
-                code = preparedStatement.executeUpdate();
+            if(!resultSet.next()){
+                preparedStatement.execute();
+                ResultSet getKeys = preparedStatement.getGeneratedKeys();
+                if(getKeys.next()){
+                    int insertedId = getKeys.getInt(1);
+                    newCar = new CarClass(insertedId, model, brand, colour, year, price);
+              }
+            }
         } catch (SQLException e) {
             throw new DaoException("insertCar() " + e.getMessage());
         } finally {
@@ -167,7 +172,7 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
                 throw new DaoException("insertCar() " + e.getMessage());
             }
         }
-        return code;
+        return newCar;
     }
 
 
