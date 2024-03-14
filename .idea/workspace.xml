@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36c7a4d1-4412-400c-bd34-1bf7b9d988ce" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BusinessObjects/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BusinessObjects/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAOs/CarDaoInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAOs/CarDaoInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DAOs/MySqlCarDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAOs/MySqlCarDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +66,7 @@
       <workItem from="1710093169855" duration="634000" />
       <workItem from="1710155659361" duration="1998000" />
       <workItem from="1710264946440" duration="2572000" />
-      <workItem from="1710450614127" duration="2765000" />
+      <workItem from="1710450614127" duration="3125000" />
     </task>
     <servers />
   </component>
