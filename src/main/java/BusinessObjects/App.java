@@ -35,13 +35,18 @@ public class App {
             e.printStackTrace();
         }
 
-
+        System.out.println("Calling inserCar(): ");
+//       For now no new entity will be created as it already exists because i was testing
         CarClass newCar = IUserDao.insertCar("Huracan", "Lamborghini", "Silver", 2023, 250000);
         if(newCar != null){
             System.out.println("New entity added: " + newCar);
         } else {
             System.out.println("Entity was not added.");
         }
+
+        System.out.println("Deleting an entity by id ");
+        IUserDao.deleteCarById(16);
+
 
     }
 

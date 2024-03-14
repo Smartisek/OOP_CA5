@@ -110,6 +110,48 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
 //        at the end return our car object if it was found
         return car;
     }
+
+//    **** Ida's code
+    public void deleteCarById(int id) throws DaoException{
+
+        //CarDaoInterface carDaoInterface = new MySqlCarDao();
+
+        Connection connection = null;
+        PreparedStatement preparedStatement1 = null;
+
+        try
+        {
+            String query1 = "DELETE FROM car_rental.car WHERE id = ?";
+            connection = this.getConnection();
+            preparedStatement1 = connection.prepareStatement(query1);
+            System.out.println("Building a PreparedStatement to delete a new row in database.");
+
+            preparedStatement1.setInt(1, id);
+            preparedStatement1.executeUpdate();
+
+            System.out.println("Disconnected from database");
+
+        } catch (SQLException e) {
+            throw new DaoException("deleteCarById() " + e.getMessage());
+        }
+        finally
+        {
+            try
+            {
+                if (preparedStatement1 != null)
+                {
+                    preparedStatement1.close();
+                }
+                if (connection != null)
+                {
+                    freeConnection(connection);
+                }
+            } catch (SQLException e) {
+                throw new DaoException("deleteCarById() " + e.getMessage());
+            }
+        }
+    }
+
 // **** Logan's code feature for inserting a new entity
 //    **** Fixed by Dominik as Logan's code was only returning int when new entity added instead of the entity itself
     @Override
@@ -146,7 +188,7 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
                 ResultSet getKeys = preparedStatement.getGeneratedKeys(); // retrieve the keys that were generated
                 if(getKeys.next()){
                     int insertedId = getKeys.getInt(1); // get id that was auto generated
-                    newCar = new CarClass(insertedId, model, brand, colour, year, price); // Create a new carClass with auto incremented id, needed for return so we see what was added 
+                    newCar = new CarClass(insertedId, model, brand, colour, year, price); // Create a new carClass with auto incremented id, needed for return so we see what was added
               }
             }
         } catch (SQLException e) {
