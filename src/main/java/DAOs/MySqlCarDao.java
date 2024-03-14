@@ -111,6 +111,7 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
         return car;
     }
 // **** Logan's code feature for inserting a new entity
+//    **** Fixed by Dominik as Logan's code was only returning int when new entity added instead of the entity itself
     @Override
     public CarClass insertCar(String model, String brand, String colour, int year, int price) throws DaoException {
         Connection connection = null;
@@ -125,7 +126,7 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
 
             // Prepare insert statement
             String query = "INSERT INTO car VALUES (null, ?, ?, ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS); // return generated keys to be able to print the entity
             preparedStatement.setString(1, model);
             preparedStatement.setString(2, brand);
             preparedStatement.setString(3, colour);
@@ -142,10 +143,10 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
             // If the car is found in the table
             if(!resultSet.next()){
                 preparedStatement.execute();
-                ResultSet getKeys = preparedStatement.getGeneratedKeys();
+                ResultSet getKeys = preparedStatement.getGeneratedKeys(); // retrieve the keys that were generated
                 if(getKeys.next()){
-                    int insertedId = getKeys.getInt(1);
-                    newCar = new CarClass(insertedId, model, brand, colour, year, price);
+                    int insertedId = getKeys.getInt(1); // get id that was auto generated
+                    newCar = new CarClass(insertedId, model, brand, colour, year, price); // Create a new carClass with auto incremented id, needed for return so we see what was added 
               }
             }
         } catch (SQLException e) {
