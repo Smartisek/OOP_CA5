@@ -219,13 +219,15 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
         return newCar;
     }
 
+//    **** Logan's code ****
     public List<CarClass> findCarsUsingFilter(Comparator<CarClass> carComparator) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement1 = null;
         ResultSet resultSet = null;
-        List<CarClass> carsList = new ArrayList<>();
+        List<CarClass> carsList;
 
         try {
+//          adding all of our entities into the list 
             carsList = findAllCars();
             // Sorts the list of cars using the comparator
             carsList.sort(carComparator);

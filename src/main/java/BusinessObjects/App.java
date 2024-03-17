@@ -50,7 +50,10 @@ public class App {
         IUserDao.deleteCarById(16);
 
         System.out.println("\nCall findCarsUsingFilter(), sorting list by production year");
+//      sorting our car list with our finCarUsingFilter(comparator) function where our comparator is a lamba expression that
+//      takes in two objects c1 and c2 and then compares their production year giving us list sorted in ascending order by year
         List<CarClass> sortedCars = IUserDao.findCarsUsingFilter((c1, c2) -> Integer.compare(c1.getProduction_year(), c2.getProduction_year()));
+
 
         if (sortedCars.isEmpty()) {
             System.out.println("There are no cars in the database");
@@ -61,6 +64,7 @@ public class App {
         }
 
         System.out.println("\nCall findCarUsingFilter(carYearComparatorDesc");
+//        using our carYearComparator for descending order
         sortedCars = IUserDao.findCarsUsingFilter(new carYearComparatorDes());
 
         if (sortedCars.isEmpty()) {
