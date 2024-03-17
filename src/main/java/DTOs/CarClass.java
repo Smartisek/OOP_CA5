@@ -1,5 +1,7 @@
 package DTOs;
 
+import java.util.Objects;
+
 public class CarClass {
     private int id;
     private String model;
@@ -75,5 +77,26 @@ public class CarClass {
                 ", production_year=" + production_year +
                 ", price=" + price +
                 '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CarClass car = (CarClass) o;
+        return id == car.id && production_year == car.production_year && price == car.price && Objects.equals(model, car.model) && Objects.equals(brand, car.brand) && Objects.equals(colour, car.colour);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, model, brand, colour, production_year, price);
+    }
+
+    public int compareTo(CarClass other) {
+        if(this.brand.equals(other.brand))
+            return this.model.compareTo(other.model);
+        else
+            return this.brand.compareTo(other.brand);
     }
 }
