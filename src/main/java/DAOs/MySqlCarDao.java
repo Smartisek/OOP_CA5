@@ -116,12 +116,12 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
     }
 
 //    **** Ida's code
+//    **** Dominik upgrade - return what car has been deleted by using function findCarById() to get the object before and then after
+//    delete print out deleted car
     public void deleteCarById(int id) throws DaoException{
-
-        //CarDaoInterface carDaoInterface = new MySqlCarDao();
-
         Connection connection = null;
         PreparedStatement preparedStatement1 = null;
+        CarClass carClass = null;
 
         try
         {
@@ -131,8 +131,12 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
             System.out.println("Building a PreparedStatement to delete a new row in database.");
 
             preparedStatement1.setInt(1, id);
-            preparedStatement1.executeUpdate();
 
+            CarClass carClass1 = findCarById(id);
+            carClass = carClass1;
+
+            preparedStatement1.executeUpdate();
+            System.out.println("--- Car deleted from database: ---\n" + carClass);
             System.out.println("Disconnected from database");
 
         } catch (SQLException e) {
@@ -263,7 +267,10 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
         return jsonString;
     }
 
+//    **** Dominik's code for json feature 7
     public  String carListToJson(List<CarClass> carList){
+//        Using gsonBuilder instead of just new Gson because this allows to print nicely object after object instead of everything in one line
+//        https://stackoverflow.com/questions/4105795/pretty-print-json-in-java
         Gson gsonParser = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gsonParser.toJson(carList);
         return jsonString;
