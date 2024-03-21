@@ -1,5 +1,6 @@
 package BusinessObjects;
 
+import Comparators.carYearComparatorDes;
 import DAOs.CarDaoInterface;
 import DAOs.JsonConverter;
 import DAOs.MySqlCarDao;
@@ -10,13 +11,16 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+
+// ********* Dominik interface menu ************
 public class App {
     public static void main(String[] args) throws DaoException, SQLException {
         String command = "";
 
         Scanner in = new Scanner(System.in);
         do {
-            System.out.println("1. > Find all cars inside table\n2. > Find car by id\n3. > Insert car\n4. > Delete car by id");
+            System.out.println("\n1. > Find all cars inside table\n2. > Find car by id\n3. > Insert car\n4. > Delete car by id\n5. > " +
+                    "Sort cars ASC\n6. > Sort cars DESC\nQuit > Close application");
             command = in.next();
             if(command.equals("1")){
                 fincAllCars();
@@ -34,6 +38,10 @@ public class App {
             } else if(command.equals("4")){
                 String id = in.next();
                 deleteCar(Integer.parseInt(id));
+            } else if(command.equals("5")){
+                sortAllAscending();
+            } else if(command.equals("6")){
+                sortAllDescending();
             }
             }while(!command.equalsIgnoreCase("quit"));
         }
@@ -95,53 +103,40 @@ public class App {
             IUserDao.deleteCarById(id);
         }
 
+        static void sortAllAscending() throws SQLException {
+            CarDaoInterface IUserDao = new MySqlCarDao();
+            JsonConverter JsonConverter = new JsonConverter();
+            System.out.println("\n*** Call findCarsUsingFilter(), sorting list by production year ***");
+//      sorting our car list with our finCarUsingFilter(comparator) function where our comparator is a lamba expression that
+//      takes in two objects c1 and c2 and then compares their production year giving us list sorted in ascending order by year
+        List<CarClass> sortedCars = IUserDao.findCarsUsingFilter((c1, c2) -> Integer.compare(c1.getProduction_year(), c2.getProduction_year()));
+
+
+        if (sortedCars.isEmpty()) {
+            System.out.println("There are no cars in the database");
+        } else {
+            for (CarClass sortedcar : sortedCars) {
+                System.out.println(sortedcar.toString());
+            }
+            }
+        }
+
+        static void sortAllDescending() throws SQLException {
+            CarDaoInterface IUserDao = new MySqlCarDao();
+            JsonConverter JsonConverter = new JsonConverter();
+            System.out.println("\n*** Call findCarUsingFilter(carYearComparatorDesc ***");
+//        using our carYearComparator for descending order
+            List<CarClass> sortedCars;
+        sortedCars = IUserDao.findCarsUsingFilter(new carYearComparatorDes());
+
+        if (sortedCars.isEmpty()) {
+            System.out.println("There are no cars in the database");
+        } else {
+            for (CarClass sortedcar : sortedCars) {
+                System.out.println(sortedcar.toString());
+            }
+        }
+        }
 }
-
-//        System.out.println("*** Calling inserCar(): ***");
-////       For now no new entity will be created as it already exists because i was testing
-//        CarClass newCar = IUserDao.insertCar("Mustang", "Ford", "White", 2015, 65000);
-//        if (newCar != null) {
-//            System.out.println("New entity added: " + newCar);
-//            String jsonCar = JsonConverter.carObjectToJson(newCar);
-//            System.out.println("Entity in Json string:\n" + jsonCar);
-//
-//
-//        } else {
-//            System.out.println("Entity was not added.");
-//        }
-
-
-////      While testing, it is already deleted so need to change id otherwise will get back a message disconnected from database
-//        System.out.println("*** Deleting an entity by id ***");
-//        IUserDao.deleteCarById(19);
-//
-//
-//
-//        System.out.println("\n*** Call findCarsUsingFilter(), sorting list by production year ***");
-////      sorting our car list with our finCarUsingFilter(comparator) function where our comparator is a lamba expression that
-////      takes in two objects c1 and c2 and then compares their production year giving us list sorted in ascending order by year
-//        List<CarClass> sortedCars = IUserDao.findCarsUsingFilter((c1, c2) -> Integer.compare(c1.getProduction_year(), c2.getProduction_year()));
-//
-//
-//        if (sortedCars.isEmpty()) {
-//            System.out.println("There are no cars in the database");
-//        } else {
-//            for (CarClass sortedcar : sortedCars) {
-//                System.out.println(sortedcar.toString());
-//            }
-//        }
-//
-//        System.out.println("\n*** Call findCarUsingFilter(carYearComparatorDesc ***");
-////        using our carYearComparator for descending order
-//        sortedCars = IUserDao.findCarsUsingFilter(new carYearComparatorDes());
-//
-//        if (sortedCars.isEmpty()) {
-//            System.out.println("There are no cars in the database");
-//        } else {
-//            for (CarClass sortedcar : sortedCars) {
-//                System.out.println(sortedcar.toString());
-//            }
-//        }
-//    }
 
 
