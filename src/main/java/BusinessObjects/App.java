@@ -42,16 +42,18 @@ public class App {
 
         System.out.println("Calling inserCar(): ");
 //       For now no new entity will be created as it already exists because i was testing
-        CarClass newCar = IUserDao.insertCar("Urus", "Lamborghini", "Black", 2023, 350000);
+        CarClass newCar = IUserDao.insertCar("Panamera", "Porshe", "Black", 2023, 230000);
         if (newCar != null) {
             System.out.println("New entity added: " + newCar);
-
+            Gson gsonParser = new Gson();
+            String jsonString = gsonParser.toJson(newCar);
+            System.out.println("Entity in Json string:\n" + jsonString);
 
 
         } else {
             System.out.println("Entity was not added.");
         }
-
+//      While testing, it is already deleted so need to change id otherwise will get back a message disconnected from database
         System.out.println("Deleting an entity by id ");
         IUserDao.deleteCarById(16);
 
