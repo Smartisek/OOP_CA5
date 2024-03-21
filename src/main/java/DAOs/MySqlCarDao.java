@@ -2,6 +2,7 @@ package DAOs;
 import DTOs.CarClass;
 import Exception.DaoException;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.security.PublicKey;
 import java.sql.*;
@@ -263,7 +264,7 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
     }
 
     public  String carListToJson(List<CarClass> carList){
-        Gson gsonParser = new Gson();
+        Gson gsonParser = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gsonParser.toJson(carList);
         return jsonString;
     }
