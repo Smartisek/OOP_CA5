@@ -11,4 +11,6 @@ public interface CarDaoInterface {
     public void deleteCarById(int id) throws DaoException;
 
     public List<CarClass> findCarsUsingFilter(Comparator<CarClass> carComparator) throws SQLException;
+
+    public String carObjectToJson(CarClass car);
 }

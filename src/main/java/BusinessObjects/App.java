@@ -42,12 +42,11 @@ public class App {
 
         System.out.println("Calling inserCar(): ");
 //       For now no new entity will be created as it already exists because i was testing
-        CarClass newCar = IUserDao.insertCar("Panamera", "Porshe", "Black", 2023, 230000);
+        CarClass newCar = IUserDao.insertCar("Mustang", "Ford", "White", 2015, 65000);
         if (newCar != null) {
             System.out.println("New entity added: " + newCar);
-            Gson gsonParser = new Gson();
-            String jsonString = gsonParser.toJson(newCar);
-            System.out.println("Entity in Json string:\n" + jsonString);
+            String jsonCar = IUserDao.carObjectToJson(newCar);
+            System.out.println("Entity in Json string:\n" + jsonCar);
 
 
         } else {
