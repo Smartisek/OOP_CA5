@@ -3,6 +3,7 @@ import DTOs.CarClass;
 import Exception.DaoException;
 import com.google.gson.Gson;
 
+import java.security.PublicKey;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -254,9 +255,16 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
         return carsList;
     }
 
+//    **** Dominik's code for json feature 8
     public String carObjectToJson(CarClass car){
         Gson gsonParses = new Gson();
         String jsonString = gsonParses.toJson(car);
+        return jsonString;
+    }
+
+    public  String carListToJson(List<CarClass> carList){
+        Gson gsonParser = new Gson();
+        String jsonString = gsonParser.toJson(carList);
         return jsonString;
     }
 }

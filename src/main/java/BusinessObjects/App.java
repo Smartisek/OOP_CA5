@@ -24,6 +24,8 @@ public class App {
                 for (CarClass car : cars) {
                     System.out.println(car.toString());
                 }
+                String carList = IUserDao.carListToJson(cars);
+                System.out.println("*** findAllCars() into Json: ***\n" + carList);
             }
 
             System.out.println("\n Call: findCarById()");
