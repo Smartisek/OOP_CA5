@@ -9,6 +9,7 @@ import Comparators.carYearComparatorDes;
 
 import java.sql.SQLException;
 import java.util.List;
+import com.google.gson.Gson;
 
 public class App {
     public static void main(String[] args) throws DaoException, SQLException {
@@ -37,17 +38,24 @@ public class App {
             e.printStackTrace();
         }
 
+
+
         System.out.println("Calling inserCar(): ");
 //       For now no new entity will be created as it already exists because i was testing
-        CarClass newCar = IUserDao.insertCar("Huracan", "Lamborghini", "Silver", 2023, 250000);
+        CarClass newCar = IUserDao.insertCar("Urus", "Lamborghini", "Black", 2023, 350000);
         if (newCar != null) {
             System.out.println("New entity added: " + newCar);
+
+
+
         } else {
             System.out.println("Entity was not added.");
         }
 
         System.out.println("Deleting an entity by id ");
         IUserDao.deleteCarById(16);
+
+
 
         System.out.println("\nCall findCarsUsingFilter(), sorting list by production year");
 //      sorting our car list with our finCarUsingFilter(comparator) function where our comparator is a lamba expression that

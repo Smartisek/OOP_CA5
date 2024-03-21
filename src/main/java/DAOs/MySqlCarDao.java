@@ -227,7 +227,7 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
         List<CarClass> carsList;
 
         try {
-//          adding all of our entities into the list 
+//          adding all of our entities into the list
             carsList = findAllCars();
             // Sorts the list of cars using the comparator
             carsList.sort(carComparator);
