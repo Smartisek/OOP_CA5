@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import Exception.DaoException;
 import DTOs.CarClass;
+import DAOs.JsonConverter;
 public interface CarDaoInterface {
     public List<CarClass> findAllCars() throws DaoException;
     public CarClass findCarById(int id) throws DaoException;
@@ -11,7 +12,5 @@ public interface CarDaoInterface {
     public void deleteCarById(int id) throws DaoException;
 
     public List<CarClass> findCarsUsingFilter(Comparator<CarClass> carComparator) throws SQLException;
-    public String carObjectToJson(CarClass car);
-    public  String carListToJson(List<CarClass> carList);
 
 }

@@ -1,6 +1,7 @@
 package BusinessObjects;
 
 import DAOs.CarDaoInterface;
+import DAOs.JsonConverter;
 import DAOs.MySqlCarDao;
 import DAOs.MySqlDao;
 import DTOs.CarClass;
@@ -9,11 +10,11 @@ import Comparators.carYearComparatorDes;
 
 import java.sql.SQLException;
 import java.util.List;
-import com.google.gson.Gson;
 
 public class App {
     public static void main(String[] args) throws DaoException, SQLException {
         CarDaoInterface IUserDao = new MySqlCarDao();
+        JsonConverter JsonConverter = new JsonConverter();
         try {
             System.out.println("\n **** Call: findAllCars() ***");
             List<CarClass> cars = IUserDao.findAllCars();
@@ -24,13 +25,13 @@ public class App {
                 for (CarClass car : cars) {
                     System.out.println(car.toString());
                 }
-                String carList = IUserDao.carListToJson(cars);
+                String carList = JsonConverter.carListToJson(cars);
                 System.out.println("*** findAllCars() into Json: ***\n" + carList);
             }
 
             System.out.println("\n *** Call: findCarById() ***");
             CarClass car = IUserDao.findCarById(2);
-            String carJson = IUserDao.carObjectToJson(car);
+            String carJson = JsonConverter.carObjectToJson(car);
             if (car != null) { //null is returned if in is not valid
                 System.out.println("Car found: " + car);
                 System.out.println("Car found Json: " + carJson + "\n");
@@ -49,7 +50,7 @@ public class App {
         CarClass newCar = IUserDao.insertCar("Mustang", "Ford", "White", 2015, 65000);
         if (newCar != null) {
             System.out.println("New entity added: " + newCar);
-            String jsonCar = IUserDao.carObjectToJson(newCar);
+            String jsonCar = JsonConverter.carObjectToJson(newCar);
             System.out.println("Entity in Json string:\n" + jsonCar);
 
 

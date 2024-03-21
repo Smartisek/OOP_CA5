@@ -260,19 +260,4 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
         return carsList;
     }
 
-//    **** Dominik's code for json feature 8
-    public String carObjectToJson(CarClass car){
-        Gson gsonParses = new Gson();
-        String jsonString = gsonParses.toJson(car);
-        return jsonString;
-    }
-
-//    **** Dominik's code for json feature 7
-    public  String carListToJson(List<CarClass> carList){
-//        Using gsonBuilder instead of just new Gson because this allows to print nicely object after object instead of everything in one line
-//        https://stackoverflow.com/questions/4105795/pretty-print-json-in-java
-        Gson gsonParser = new GsonBuilder().setPrettyPrinting().create();
-        String jsonString = gsonParser.toJson(carList);
-        return jsonString;
-    }
 }
