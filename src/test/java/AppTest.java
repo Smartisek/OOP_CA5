@@ -12,6 +12,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 public class AppTest {
 
+    /**
+     * Main Author: Dominik Domalip
+     */
 //    ***** Dominik's code for testing functionality for looking up car by id *****
     @Test
     void testFindCarByIdPass() throws DaoException {
@@ -28,6 +31,10 @@ public class AppTest {
         System.out.println(expectedCar);
         System.out.println("\n" + actualCar);
     }
+
+    /**
+     * Main Author: Dominik Domalip
+     */
 //  ***** Dominik's test for finding all cars *****
     @Test
     void testFindAllCars() throws DaoException{
@@ -43,6 +50,10 @@ public class AppTest {
         System.out.println(expectedCars);
         System.out.println(actualCars);
     }
+
+    /**
+     * Main Author: Dominik Domalip
+     */
 // Im not sure how to do this test yet as it gives me null value after actual or expected is called
 //    so i will always get fail
 //    @Test
@@ -59,6 +70,9 @@ public class AppTest {
 //        assertEquals(expected, actual);
 //    }
 
+    /**
+     * Main Author: Dominik Domalip
+     */
 //    ***** Dominik's test for order descending *****
     @Test
     void sortAllDescendingTest() throws SQLException {
@@ -73,6 +87,10 @@ public class AppTest {
         System.out.println("Expected: " + expectedOrder);
         System.out.println("Actual: " + actualOrder);
     }
+
+    /**
+     * Main Author: Dominik Domalip
+     */
 // ***** Dominik's code for order ascending *****
     @Test
     void sortAllAscendingTest() throws SQLException{

@@ -11,6 +11,9 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
+    /**
+     * Main Author: Dominik Domalip
+     */
     @Override
     public List<CarClass> findAllCars() throws DaoException {
         Connection connection = null;
@@ -55,9 +58,11 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
         return carList;
     }
 
+    /**
+     * Main Author: Dominik Domalip
+     */
     //    Feature 2 – Find and Display (a single) Entity by Key
 //    e.g. getPlayerById(id ) – return a single entity (DTO) and display its contents.
-
 //    **** Dominik's code ****
     @Override
     public CarClass findCarById(int id) throws DaoException{
@@ -115,6 +120,11 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
         return car;
     }
 
+
+    /**
+     * Main Author: Ida Tehlarova
+     * Other contributors: Dominik Domalip
+     */
 //    **** Ida's code
 //    **** Dominik upgrade - return what car has been deleted by using function findCarById() to get the object before and then after
 //    delete print out deleted car
@@ -160,6 +170,10 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
         }
     }
 
+/**
+ * Main Author: Logan Rushe
+ * Other contributors: Dominik Domalip
+ */
 // **** Logan's code feature for inserting a new entity
 //    **** Fixed by Dominik as Logan's code was only returning int when new entity added instead of the entity itself
     @Override
@@ -226,6 +240,9 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
         return newCar;
     }
 
+    /**
+     * Main Author: Logan Rushe
+     */
 //    **** Logan's code ****
     public List<CarClass> findCarsUsingFilter(Comparator<CarClass> carComparator) throws SQLException {
         Connection connection = null;
