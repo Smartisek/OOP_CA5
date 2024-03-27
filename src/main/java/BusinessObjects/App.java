@@ -50,26 +50,28 @@ public class App {
             }while(!command.equalsIgnoreCase("quit"));
         }
 
-       public static void fincAllCars() {
-            CarDaoInterface IUserDao = new MySqlCarDao();
-            JsonConverter JsonConverter = new JsonConverter();
-            try {
-                System.out.println("\n **** Call: findAllCars() ***");
-                List<CarClass> cars = IUserDao.findAllCars();
+       public static List<CarClass> fincAllCars() {
+           CarDaoInterface IUserDao = new MySqlCarDao();
+           JsonConverter JsonConverter = new JsonConverter();
+           List<CarClass> cars;
+           try {
+               System.out.println("\n **** Call: findAllCars() ***");
+               cars = IUserDao.findAllCars();
 
-                if (cars.isEmpty()) {
-                    System.out.println("No cars in the system");
-                } else {
-                    for (CarClass car : cars) {
-                        System.out.println(car.toString());
-                    }
-                    String carList = JsonConverter.carListToJson(cars);
-                    System.out.println("*** findAllCars() into Json: ***\n" + carList);
-                }
-            } catch (DaoException e) {
-                throw new RuntimeException(e);
-            }
-        }
+               if (cars.isEmpty()) {
+                   System.out.println("No cars in the system");
+               } else {
+                   for (CarClass car : cars) {
+                       System.out.println(car.toString());
+                   }
+                   String carList = JsonConverter.carListToJson(cars);
+                   System.out.println("*** findAllCars() into Json: ***\n" + carList);
+               }
+           } catch (DaoException e) {
+               throw new RuntimeException(e);
+           }
+           return cars;
+       }
 
         public static CarClass findCarById(int id) throws DaoException {
             CarDaoInterface IUserDao = new MySqlCarDao();
