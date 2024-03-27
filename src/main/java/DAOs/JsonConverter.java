@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.List;
 
+/**
+ * Main Author: Dominik Domalip
+ */
 // *** Dominik's Code for feature 7 and 8
 public class JsonConverter {
     public String carObjectToJson(CarClass car){
