@@ -38,7 +38,11 @@ public class App {
                 String colour = in.next();
                 int year = in.nextInt();
                 int price = in.nextInt();
-                insertCar(model, brand, colour, year, price);
+                try {
+                    insertCar(model, brand, colour, year, price);
+                } catch (DaoException e) {
+                    throw new RuntimeException(e);
+                }
             } else if(command.equals("4")){
                 String id = in.next();
                 deleteCar(Integer.parseInt(id));
@@ -88,7 +92,7 @@ public class App {
             return car;
         }
 
-        static void insertCar(String model, String brand, String colour, int year, int price) throws DaoException {
+        public static CarClass insertCar(String model, String brand, String colour, int year, int price) throws DaoException {
             CarDaoInterface IUserDao = new MySqlCarDao();
             JsonConverter JsonConverter = new JsonConverter();
             System.out.println("*** Calling insertCar(): ***");
@@ -98,10 +102,10 @@ public class App {
             String jsonCar = JsonConverter.carObjectToJson(newCar);
             System.out.println("Entity in Json string:\n" + jsonCar);
 
-
         } else {
             System.out.println("Entity was not added.");
              }
+            return newCar;
         }
 
         static void deleteCar(int id) throws DaoException {
@@ -110,7 +114,7 @@ public class App {
             IUserDao.deleteCarById(id);
         }
 
-        static void sortAllAscending() throws SQLException {
+       public static List<CarClass> sortAllAscending() throws SQLException {
             CarDaoInterface IUserDao = new MySqlCarDao();
             JsonConverter JsonConverter = new JsonConverter();
             System.out.println("\n*** Call findCarsUsingFilter(), sorting list by production year ***");
@@ -124,11 +128,12 @@ public class App {
         } else {
             for (CarClass sortedcar : sortedCars) {
                 System.out.println(sortedcar.toString());
+                }
             }
-            }
-        }
+           return sortedCars;
+       }
 
-        static void sortAllDescending() throws SQLException {
+       public static List<CarClass> sortAllDescending() throws SQLException {
             CarDaoInterface IUserDao = new MySqlCarDao();
             JsonConverter JsonConverter = new JsonConverter();
             System.out.println("\n*** Call findCarUsingFilter(carYearComparatorDesc ***");
@@ -143,7 +148,8 @@ public class App {
                 System.out.println(sortedcar.toString());
             }
         }
-        }
+           return sortedCars;
+       }
 }
 
 
