@@ -26,7 +26,11 @@ public class App {
                 fincAllCars();
             } else if(command.equals("2")){
                String id = in.next();
-                findCarById(Integer.parseInt(id));
+                try {
+                    findCarById(Integer.parseInt(id));
+                } catch (DaoException e) {
+                    throw new RuntimeException(e);
+                }
             } else if(command.equals("3")){
                 System.out.println("Model: Brand: Colour: Year: Price");
                 String model = in.next();
@@ -46,7 +50,7 @@ public class App {
             }while(!command.equalsIgnoreCase("quit"));
         }
 
-        static void fincAllCars() {
+       public static void fincAllCars() {
             CarDaoInterface IUserDao = new MySqlCarDao();
             JsonConverter JsonConverter = new JsonConverter();
             try {
@@ -67,7 +71,7 @@ public class App {
             }
         }
 
-        static void findCarById(int id) throws DaoException {
+        public static CarClass findCarById(int id) throws DaoException {
             CarDaoInterface IUserDao = new MySqlCarDao();
             JsonConverter JsonConverter = new JsonConverter();
             System.out.println("\n *** Call: findCarById() ***");
@@ -79,7 +83,8 @@ public class App {
             } else {
                 System.out.println("Car with this id not found in database");
             }
-         }
+            return car;
+        }
 
         static void insertCar(String model, String brand, String colour, int year, int price) throws DaoException {
             CarDaoInterface IUserDao = new MySqlCarDao();
