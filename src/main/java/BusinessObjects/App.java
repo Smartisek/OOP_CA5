@@ -47,6 +47,7 @@ public class App {
                     throw new RuntimeException(e);
                 }
             } else if(command.equals("4")){
+                System.out.println("Enter id: ");
                 String id = in.next();
                 deleteCar(Integer.parseInt(id));
             } else if(command.equals("5")){

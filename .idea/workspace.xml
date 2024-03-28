@@ -7,7 +7,6 @@
     <list default="true" id="36c7a4d1-4412-400c-bd34-1bf7b9d988ce" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BusinessObjects/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BusinessObjects/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAOs/MySqlCarDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAOs/MySqlCarDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AppTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +81,8 @@
       <workItem from="1711477922968" duration="1000" />
       <workItem from="1711483339079" duration="23000" />
       <workItem from="1711553456606" duration="4217000" />
-      <workItem from="1711557957015" duration="285000" />
+      <workItem from="1711557957015" duration="345000" />
+      <workItem from="1711629367651" duration="1273000" />
     </task>
     <servers />
   </component>
