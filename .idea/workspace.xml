@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36c7a4d1-4412-400c-bd34-1bf7b9d988ce" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/BusinessObjects/ClientMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/BusinessObjects/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BusinessObjects/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BusinessObjects/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BusinessObjects/ClientMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BusinessObjects/ClientMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BusinessObjects/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BusinessObjects/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DAOs/JsonConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAOs/JsonConverter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +85,7 @@
       <workItem from="1711553456606" duration="4217000" />
       <workItem from="1711557957015" duration="345000" />
       <workItem from="1711629367651" duration="1273000" />
-      <workItem from="1712412539683" duration="1922000" />
+      <workItem from="1712412539683" duration="3472000" />
     </task>
     <servers />
   </component>
