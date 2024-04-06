@@ -22,4 +22,12 @@ public class JsonConverter {
         String jsonString = gsonParser.toJson(carList);
         return jsonString;
     }
+
+    public CarClass fromJson(String carJson){
+        Gson gsonParser = new Gson();
+        CarClass car = gsonParser.fromJson(carJson, CarClass.class);
+        return car;
+    }
+
+
 }
