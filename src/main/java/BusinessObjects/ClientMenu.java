@@ -1,8 +1,9 @@
 package BusinessObjects;
 import DTOs.CarClass;
 import DAOs.JsonConverter;
-import DTOs.CarClass;
-import com.google.gson.Gson;
+import DAOs.MySqlCarDao;
+import DAOs.CarDaoInterface;
+import Exception.DaoException;
 
 import java.io.*;
 import java.net.Socket;
@@ -22,6 +23,8 @@ public class ClientMenu {
     public void start(){
         // Json class converter to get car class from json later on
         JsonConverter JsonConverter = new JsonConverter();
+        CarDaoInterface IUserDao = new MySqlCarDao();
+
         /**
          * Main Author: Dominik Domalip
          */
@@ -34,7 +37,8 @@ public class ClientMenu {
                 ){
             System.out.println("Client Menu message: The Client Menu is running and has connected to the server.");
             Scanner consoleInput = new Scanner(System.in);
-            System.out.println("Valid commands: " + "\n" + "display ID" + "\n" + "displayAll" + "\n" + "add model brand colour production_year price");
+            System.out.println("Valid commands: " + "\n" + "display ID" + "\n" + "displayAll" + "\n" + "add model brand colour production_year price" +
+                    "\n" + "delete ID");
             System.out.println("Enter command: ");
             String userInput = consoleInput.nextLine();
             out.println(userInput);
@@ -69,9 +73,25 @@ public class ClientMenu {
 //                get response from the server with entity or error message
                 String newCar = in.readLine();
                 System.out.println("Client Menu message: New entity was added into database. New entity: " + "\n" + newCar);
+            } else if(userInput.startsWith("delete")){
+//                splitting input to be able to pass id in
+                String[] parts = userInput.split(" ");
+                int id = Integer.parseInt(parts[1]);
+//                using dao function find car by id so we can put it into json format, this could be just done with request as int id but since the specification
+//                says to send to server request in Json, I am using this function to get car with that id and parsing it into json
+                CarClass request = IUserDao.findCarById(id);
+//                carclass to json
+                String requestJson = JsonConverter.carObjectToJson(request);
+                System.out.println("Client Menu message: Sending request to server to delete: " + requestJson);
+//                send request to sever
+                out.println(requestJson);
+                String income = in.readLine();
+                System.out.println(income + requestJson);
             }
         } catch (IOException e){
             System.out.println("Client message: IOException: " + e);
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
         }
         System.out.println("Exiting client, but server may still be running");
     }

@@ -10,6 +10,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 
+/**
+ * Main Author: Dominik Domalip
+ */
 public class Server {
     final int SERVER_PORT_NUMBER = 7777;
 
@@ -64,9 +67,28 @@ public class Server {
                             System.out.println("Server message: Entity successfully added. Entity: " + "\n" + newCar);
                             String jsonNewCar = JsonConverter.carObjectToJson(newCar);
                             out.println(jsonNewCar);
-//                            otherwise print message when failed to add, meaning entity already exists or was not able to insert 
+//                            otherwise print message when failed to add, meaning entity already exists or was not able to insert
                         } else {
                             System.out.println("Server message: Entity failed to add.");
+                        }
+                    } else if(request.startsWith("delete")){
+//                        read request from client
+                        String requestDelete = in.readLine();
+                        System.out.println("Server message: Server receives request to delete: " + requestDelete);
+//                        put request into car class from json
+                        CarClass requestCar = JsonConverter.fromJson(requestDelete);
+//                        call on delele requested car by id passing id from requestCar
+                        IUserDao.deleteCarById(requestCar.getId());
+//                        delete check, after car was deleted, try look for it again, if not found that means delete was successful
+                        CarClass deleteCheck = IUserDao.findCarById(requestCar.getId());
+//                        if after delete we can not find the entity so it is null, means successful delete and send message to client
+                        if(deleteCheck == null){
+                            System.out.println("Server message: The entity with id: " + requestCar.getId() + " was successfully deleted");
+                            out.println("Delete successful for: ");
+//                        if we are able to find the entity after delete than delete failed and send the message to client 
+                        } else {
+                            System.out.println("Server message: Error entity not deleted");
+                            out.println("Delete failed for: ");
                         }
                     }
                 } catch (DaoException e) {
