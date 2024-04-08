@@ -51,6 +51,23 @@ public class Server {
                         String carsJson = JsonConverter.carListToJson(allCars); //*********
                         System.out.println("Server Message: Sending to Client Menu: " + "\n" + carsJson + "\n");
                         out.println(carsJson);
+                    } else if(request.startsWith("add")){
+//                        get the request from client in json format
+                        String jsonRequest = in.readLine();
+                        System.out.println("Server message: Server receives " + jsonRequest);
+//                        convert json request into car class object
+                        CarClass carRequest = JsonConverter.fromJson(jsonRequest);
+//                        calling onto insertCar function in DAO with our interface and passing in requested data from carRequest instance
+                        CarClass newCar = IUserDao.insertCar(carRequest.getModel(), carRequest.getBrand(), carRequest.getColour(), carRequest.getProduction_year(), carRequest.getPrice());
+//                        if newCar is not null meaning it was added so print message and send result to client
+                        if(newCar != null){
+                            System.out.println("Server message: Entity successfully added. Entity: " + "\n" + newCar);
+                            String jsonNewCar = JsonConverter.carObjectToJson(newCar);
+                            out.println(jsonNewCar);
+//                            otherwise print message when failed to add, meaning entity already exists or was not able to insert 
+                        } else {
+                            System.out.println("Server message: Entity failed to add.");
+                        }
                     }
                 } catch (DaoException e) {
                     throw new RuntimeException(e);
