@@ -2,6 +2,10 @@ package DAOs;
 import DTOs.CarClass;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+
+import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -29,4 +33,10 @@ public class JsonConverter {
         return car;
     }
 
+    public List<CarClass> JsonToCarList(String carListJson){
+        Gson gsonParser = new Gson();
+        Type carListType = new TypeToken<List<CarClass>>(){}.getType();
+        List<CarClass> carList = gsonParser.fromJson(carListJson, carListType);
+        return carList;
+    }
 }

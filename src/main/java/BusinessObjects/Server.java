@@ -8,6 +8,7 @@ import Exception.DaoException;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
 public class Server {
     final int SERVER_PORT_NUMBER = 7777;
@@ -36,7 +37,7 @@ public class Server {
 
                     System.out.println("Server Message: Received from Client Menu: \"" + request + "\n");
 //  Logic for handling the request from client
-                    if(request.startsWith("display")){
+                    if(request.startsWith("displayEntity")){
 //                        put request into an array and split it by space
                         String[] parts = request.split(" ");
 //                        second part of request will be id that gets passed into IUserDao function
@@ -45,6 +46,11 @@ public class Server {
 //                        convert output class into JSon
                         String carJson = JsonConverter.carObjectToJson(car);
                         out.println(carJson);
+                    } else if(request.startsWith("displayAll")){
+                        List<CarClass>allCars =IUserDao.findAllCars();
+                        String carsJson = JsonConverter.carListToJson(allCars); //*********
+                        System.out.println("Server Message: Sending to Client Menu: " + "\n" + carsJson + "\n");
+                        out.println(carsJson);
                     }
                 } catch (DaoException e) {
                     throw new RuntimeException(e);
