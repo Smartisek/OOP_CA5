@@ -51,7 +51,6 @@ public class ClientMenu {
                 System.out.println("Client Menu message: Response from server: \"" + car + "\n" );
             } else if(userInput.startsWith("displayAll")){
                 String cars = in.readLine();
-//                List<CarClass> carList = Arrays.asList(new Gson().fromJson(cars, CarClass.class));
                 System.out.println("Client Menu message: Received from server: " +"\n" + cars + "\n");
                 List<CarClass> allCars = JsonConverter.JsonToCarList(cars);
                 for(CarClass car : allCars){
