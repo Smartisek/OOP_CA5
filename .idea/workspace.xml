@@ -7,7 +7,7 @@
     <list default="true" id="36c7a4d1-4412-400c-bd34-1bf7b9d988ce" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BusinessObjects/ClientMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BusinessObjects/ClientMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAOs/JsonConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAOs/JsonConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BusinessObjects/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BusinessObjects/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +40,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/domal/IdeaProjects/oop-client-server-time-and-echo&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/domal/OneDrive/Plocha/DKIT/SecondYear/Java/OOP_CA5&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -89,7 +89,10 @@
       <workItem from="1712586292388" duration="746000" />
       <workItem from="1712588456700" duration="2240000" />
       <workItem from="1712597322636" duration="1540000" />
-      <workItem from="1712654316201" duration="743000" />
+      <workItem from="1712654316201" duration="1590000" />
+      <workItem from="1713351316377" duration="32000" />
+      <workItem from="1713538988764" duration="997000" />
+      <workItem from="1713624782843" duration="1985000" />
     </task>
     <servers />
   </component>
