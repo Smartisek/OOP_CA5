@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,4 +40,28 @@ public class JsonConverter {
         List<CarClass> carList = gsonParser.fromJson(carListJson, carListType);
         return carList;
     }
+
+    /**
+     * Main Author: Logan Rushe
+     */
+    public List<String> JsonToStringList(String stringListJson){
+        Gson gsonParser = new Gson();
+        List<String> stringList = new ArrayList<>();
+        // Type stringListType = new TypeToken<List<String>>(){}.getType();
+        stringList = gsonParser.fromJson(stringListJson, stringList.getClass());
+        return stringList;
+    }
+
+    /**
+     * Main Author: Logan Rushe
+     */
+    public  String stringListToJson(List<String> stringList){
+//        Using gsonBuilder instead of just new Gson because this allows to print nicely object after object instead of everything in one line
+//        https://stackoverflow.com/questions/4105795/pretty-print-json-in-java
+        Gson gsonParser = new GsonBuilder().create();
+        String jsonString = gsonParser.toJson(stringList);
+        return jsonString;
+    }
 }
+
+

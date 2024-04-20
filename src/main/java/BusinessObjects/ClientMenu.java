@@ -35,9 +35,11 @@ public class ClientMenu {
               BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 ){
             System.out.println("Client Menu message: The Client Menu is running and has connected to the server.");
+            out.println("databaseClient"); //to know server which client is talking to it
             Scanner consoleInput = new Scanner(System.in);
-            System.out.println("Valid commands: " + "\n" + "displayEntity ID" + "\n" + "displayAll" + "\n" + "add model brand colour production_year price" +
-                    "\n" + "delete ID" + "\n" + "quit");
+            System.out.println("Valid commands: " + "\n" + "display entity + ID" + "\n" + "display all cars" + "\n" + "add car + model, brand, colour, production_year, price" +
+                    "\n" + "delete car + ID" + "\n" + "quit");
+            ClientServerCommands commands = new ClientServerCommands();
            String userInput = "";
 
             while(!userInput.startsWith("quit")){
@@ -45,27 +47,27 @@ public class ClientMenu {
                 userInput = consoleInput.nextLine();
                 out.println(userInput);
 
-                if(userInput.startsWith("displayEntity")){
+                if(userInput.startsWith(commands.DisplayCarById)){
                     // receive output from server in Json format
                     String carJson = in.readLine();
                     // turn json format into car class and then print into console
                     CarClass car = JsonConverter.fromJson(carJson);
                     System.out.println("Client Menu message: Response from server: \"" + car + "\n" );
-                } else if(userInput.startsWith("displayAll")){
+                } else if(userInput.startsWith(commands.DisplayAllCars)){
                     String cars = in.readLine();
                     System.out.println("Client Menu message: Received from server: " +"\n" + cars + "\n");
                     List<CarClass> allCars = JsonConverter.JsonToCarList(cars);
                     for(CarClass car : allCars){
                         System.out.println(car);
                     }
-                } else if(userInput.startsWith("add")){
+                } else if(userInput.startsWith(commands.AddACar)){
 //                split input into parts so we can find parts for input
                     String[] parts = userInput.split(" ");
 //                parsing string data into integer needed
-                    int production_year = Integer.parseInt(parts[4]);
-                    int price = Integer.parseInt(parts[5]);
+                    int production_year = Integer.parseInt(parts[5]);
+                    int price = Integer.parseInt(parts[6]);
 //                creating an instance for the requested insert
-                    CarClass insertRequest = new CarClass(0, parts[1], parts[2], parts[3], production_year, price);
+                    CarClass insertRequest = new CarClass(1, parts[2], parts[3], parts[4], production_year, price);
                     String jsonRequest = JsonConverter.carObjectToJson(insertRequest);
                     System.out.println("Client Menu message: Sending out " + jsonRequest);
 //                send the request to the server
@@ -74,10 +76,10 @@ public class ClientMenu {
 //                get response from the server with entity or error message
                     String newCar = in.readLine();
                     System.out.println("Client Menu message: New entity was added into database. New entity: " + "\n" + newCar);
-                } else if(userInput.startsWith("delete")){
+                } else if(userInput.startsWith(commands.DeleteCarById)){
 //                splitting input to be able to pass id in
                     String[] parts = userInput.split(" ");
-                    int id = Integer.parseInt(parts[1]);
+                    int id = Integer.parseInt(parts[2]);
 //                using dao function find car by id so we can put it into json format, this could be just done with request as int id but since the specification
 //                says to send to server request in Json, I am using this function to get car with that id and parsing it into json
                     CarClass request = IUserDao.findCarById(id);
