@@ -13,9 +13,9 @@ import java.util.Scanner;
 /**
  * Main Author: Dominik Domalip
  */
-public class ClientMenu {
+public class ClientMenuDatabse {
     public static void main(String[] args) {
-        ClientMenu clientMenu = new ClientMenu();
+        ClientMenuDatabse clientMenu = new ClientMenuDatabse();
         clientMenu.start();
     }
 
