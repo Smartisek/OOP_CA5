@@ -10,7 +10,6 @@ public interface CarDaoInterface {
     public CarClass findCarById(int id) throws DaoException;
     public CarClass insertCar(String model, String brand, String colour, int year, int price) throws DaoException;
     public void deleteCarById(int id) throws DaoException;
-
     public List<CarClass> findCarsUsingFilter(Comparator<CarClass> carComparator) throws SQLException;
-
+    public void updateCar(int id, CarClass car) throws DaoException;
 }

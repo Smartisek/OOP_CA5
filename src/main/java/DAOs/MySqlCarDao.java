@@ -244,6 +244,7 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
      * Main Author: Logan Rushe
      */
 //    **** Logan's code ****
+    @Override
     public List<CarClass> findCarsUsingFilter(Comparator<CarClass> carComparator) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement1 = null;
@@ -275,6 +276,52 @@ public class MySqlCarDao extends MySqlDao implements CarDaoInterface{
             }
         }
         return carsList;
+    }
+
+    /**
+     * Main Author: Ida Tehlarova
+     */
+    @Override
+    public void updateCar(int id, CarClass car) throws DaoException{
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        PreparedStatement checkStatement = null;
+        int code = 0;
+
+        try {
+            connection = this.getConnection();
+
+            // Prepare insert statement
+            String query = "UPDATE car SET model =?, brand = ?, colour = ?, production_year = ?, price = ? WHERE id = ?;";
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, car.getModel());
+            preparedStatement.setString(2, car.getBrand());
+            preparedStatement.setString(3, car.getColour());
+            preparedStatement.setInt(4, car.getProduction_year());
+            preparedStatement.setInt(5, car.getPrice());
+            preparedStatement.setInt(6, id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("updateCar() " + e.getMessage());
+        } finally {
+            try {
+                if (preparedStatement != null)
+                {
+                    preparedStatement.close();
+                }
+                if (checkStatement != null)
+                {
+                    checkStatement.close();
+                }
+                if (connection != null)
+                {
+                    freeConnection(connection);
+                }
+            } catch (SQLException e) {
+                throw new DaoException("updateCar() " + e.getMessage());
+            }
+        }
     }
 
 }

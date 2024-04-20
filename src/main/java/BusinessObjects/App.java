@@ -23,7 +23,7 @@ public class App {
         Scanner in = new Scanner(System.in);
         do {
             System.out.println("\n1. > Find all cars inside table\n2. > Find car by id\n3. > Insert car\n4. > Delete car by id\n5. > " +
-                    "Sort cars ASC\n6. > Sort cars DESC\nQuit > Close application");
+                    "Sort cars ASC\n6. > Sort cars DESC\n7. > Update car by id \nQuit > Close application");
             command = in.next();
             if(command.equals("1")){
                 fincAllCars();
@@ -158,6 +158,12 @@ public class App {
             }
         }
            return sortedCars;
+       }
+
+       public void updateCar(int id, CarClass car) throws DaoException {
+            CarDaoInterface IUserDao = new MySqlCarDao();
+           System.out.println("**** Updating car by id ****");
+           IUserDao.updateCar(id, car);
        }
 }
 
