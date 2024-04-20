@@ -7,7 +7,6 @@ import Exception.DaoException;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -93,6 +92,7 @@ public class ClientMenu {
                     out.println("Client menu is being terminated.");
                     System.out.println("Client Menu message: This client is being terminated.");
 //                    after break statement the while loop exits and that ends the clients session, after try statement ensures that socket, printWritter and buffer are closed and disconnects from server
+//                    therefore no need to close anything as try is a feature in java that will do it for us
                     break;
                 }
             }
